@@ -38,7 +38,6 @@ var blankSpaces = createBlankSpaces();
 
 //ROUTES
 app.get("/", function(req, res) {
-  console.log("session", req.session.errorMsg);
   mySession = req.session;
   res.render("index", {
     blankSpaces: blankSpaces,
@@ -51,24 +50,15 @@ app.post("/", function(req, res) {
   console.log("userGuesses: ", userGuesses);
   console.log("guesses", req.body.guess);
 
-  //is it a valid guess
-  if (userGuesses.length > 1) {
-    req.session.errorMsg = "Please enter ONLY a SINGLE letter";
-    //do something bad
-  } else if (isNaN(userGuesses)) {
-    console.log("req.session.errorMsg: ", req.session.errorMsg);
-    req.session.errorMsg = "";
-    //do something good
-  } else {
-    req.session.errorMsg = "Please enter ONLY a LETTER";
-    //do something bad becouse this is a number
+  checkValidityOfUserGuess(req);
+  for (var i = 0; i < randomWord.length; i++) {
+    if (randomWord.split("")[i] === userGuesses) {
+      //correct guess
+      blankSpaces[i] = userGuesses;
+    } else {
+      //add guess to incorrect guesses
+    }
   }
-  //is the guess in the word
-
-  //add guess to blank spaces
-
-  //add guess to incorrect guesses
-
   //keep track of incorrect guesses
   return res.redirect("/");
 });
@@ -88,6 +78,19 @@ function createBlankSpaces() {
     x.push("_ ");
   }
   return x;
+}
+
+function checkValidityOfUserGuess(request) {
+  if (userGuesses.length > 1) {
+    request.session.errorMsg = "Please enter ONLY a SINGLE letter";
+    //do something bad
+  } else if (isNaN(userGuesses)) {
+    request.session.errorMsg = "";
+    //do something good
+  } else {
+    request.session.errorMsg = "Please enter ONLY a LETTER";
+    //do something bad becouse this is a number
+  }
 }
 
 //Notes
