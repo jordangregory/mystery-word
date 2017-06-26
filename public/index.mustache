@@ -16,8 +16,8 @@
 
 	<p>Directions: You'll have 8 guesses to correctly guess the Mystery Word. Input your guess in the box below.</p>
 	<p class="randomWord">
-	{{#blankSpaces}}{{.}}{{/blankSpaces}}</p>
-
+		{{#blankSpaces}}{{.}}{{/blankSpaces}}</p>
+	<p>{{errorMsg}}</p>
 	<form action="/" method="post" class="guessInput">
 		<input type="text" name="guess" placeholder="Type your guess here!">
 		<input type="submit" value="Good Luck!">

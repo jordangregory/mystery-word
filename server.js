@@ -21,7 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
     secret: "ham sandwich",
-    resave: false,
+    resave: true,
+    saveUninitialized: true,
     cookies: {
       maxAge: 600000
     }
@@ -37,19 +38,31 @@ var blankSpaces = createBlankSpaces();
 
 //ROUTES
 app.get("/", function(req, res) {
-  // console.log("session", req.session);
+  console.log("session", req.session.errorMsg);
   mySession = req.session;
-  res.render("index", { blankSpaces: blankSpaces });
+  res.render("index", {
+    blankSpaces: blankSpaces,
+    errorMsg: req.session.errorMsg
+  });
 });
 
 app.post("/", function(req, res) {
   userGuesses = req.body.guess;
   console.log("userGuesses: ", userGuesses);
   console.log("guesses", req.body.guess);
-  res.redirect("/");
 
   //is it a valid guess
-
+  if (userGuesses.length > 1) {
+    req.session.errorMsg = "Please enter ONLY a SINGLE letter";
+    //do something bad
+  } else if (isNaN(userGuesses)) {
+    console.log("req.session.errorMsg: ", req.session.errorMsg);
+    req.session.errorMsg = "";
+    //do something good
+  } else {
+    req.session.errorMsg = "Please enter ONLY a LETTER";
+    //do something bad becouse this is a number
+  }
   //is the guess in the word
 
   //add guess to blank spaces
@@ -57,6 +70,7 @@ app.post("/", function(req, res) {
   //add guess to incorrect guesses
 
   //keep track of incorrect guesses
+  return res.redirect("/");
 });
 
 app.listen(port, function() {});
