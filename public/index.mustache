@@ -10,17 +10,20 @@
 </head>
 <h1>Mystery Word</h1>
 
-{{session}}
-<form action="/" method="post">
-	<input type="text" name="guess" placeholder="Type your guess here!">
-	<input type="submit" value="Good Luck!">
 
-
-
-</form>
 
 <body>
 
+	<p>Directions: You'll have 8 guesses to correctly guess the Mystery Word. Input your guess in the box below.</p>
+	<p class="randomWord">
+	{{#blankSpaces}}{{.}}{{/blankSpaces}}</p>
+
+	<form action="/" method="post" class="guessInput">
+		<input type="text" name="guess" placeholder="Type your guess here!">
+		<input type="submit" value="Good Luck!">
+		<p>You have _ guesses left!</p>
+
+	</form>
 </body>
 
 </html>

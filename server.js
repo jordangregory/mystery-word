@@ -10,10 +10,6 @@ const words = fs
   .toLowerCase()
   .split("\n");
 
-var randomWord = selectRandomWord(0, words.length);
-console.log("random word", randomWord);
-
-console.log(words.length);
 //Set View Engine
 app.engine("mustache", mustacheExpress());
 app.set("views", "./public");
@@ -21,6 +17,7 @@ app.set("view engine", "mustache");
 
 //MIDDLEWARE
 app.use("/", express.static("./public"));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
     secret: "ham sandwich",
@@ -33,17 +30,34 @@ app.use(
 
 //GLOBAL VARIABLES
 var mySession;
+var userGuesses;
+var randomWord = words[selectRandomWord(0, words.length)];
+console.log("random word", randomWord);
+var blankSpaces = createBlankSpaces();
 
 //ROUTES
 app.get("/", function(req, res) {
-  console.log("session", req.session);
+  // console.log("session", req.session);
   mySession = req.session;
-  res.render("index", { session: mySession });
+  res.render("index", { blankSpaces: blankSpaces });
 });
 
-app.post("/"), function(req, res) {
-  res.redirect("index");
-};
+app.post("/", function(req, res) {
+  userGuesses = req.body.guess;
+  console.log("userGuesses: ", userGuesses);
+  console.log("guesses", req.body.guess);
+  res.redirect("/");
+
+  //is it a valid guess
+
+  //is the guess in the word
+
+  //add guess to blank spaces
+
+  //add guess to incorrect guesses
+
+  //keep track of incorrect guesses
+});
 
 app.listen(port, function() {});
 console.log("Your port is successfully running on port ", port);
@@ -51,8 +65,23 @@ console.log("Your port is successfully running on port ", port);
 function selectRandomWord(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+//Functions
+
+function createBlankSpaces() {
+  var x = [];
+  for (var i = 0; i < randomWord.length; i++) {
+    x.push("_ ");
+  }
+  return x;
+}
+
+//Notes
+//get asks for information from the server and passes it to the front-end(for the user)
+//post asks for information from the front-end(from the user) and passes it to the back-end(server)
+
 //Get the session up and running
-//Generate random word - in the backend FUCKING DONE
+//Generate random word - in the backend
 //Parse the word up into letters
 //Figure out how to display that into the front end
 //Once in the front end:
