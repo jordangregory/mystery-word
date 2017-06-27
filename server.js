@@ -32,6 +32,7 @@ app.use(
 //GLOBAL VARIABLES
 var mySession;
 var userGuesses;
+var incorrectGuesses = [];
 var randomWord = words[selectRandomWord(0, words.length)];
 console.log("random word", randomWord);
 var blankSpaces = createBlankSpaces();
@@ -41,24 +42,31 @@ app.get("/", function(req, res) {
   mySession = req.session;
   res.render("index", {
     blankSpaces: blankSpaces,
-    errorMsg: req.session.errorMsg
+    errorMsg: req.session.errorMsg,
+    incorrectGuesses: incorrectGuesses
   });
 });
 
 app.post("/", function(req, res) {
+  let isWrong = true;
   userGuesses = req.body.guess;
   console.log("userGuesses: ", userGuesses);
   console.log("guesses", req.body.guess);
 
   checkValidityOfUserGuess(req);
+
   for (var i = 0; i < randomWord.length; i++) {
     if (randomWord.split("")[i] === userGuesses) {
       //correct guess
+      isWrong = false;
       blankSpaces[i] = userGuesses;
-    } else {
-      //add guess to incorrect guesses
     }
   }
+  if (isWrong) {
+    incorrectGuesses.push(userGuesses + " ");
+    //add guess to incorrect guesses
+  }
+
   //keep track of incorrect guesses
   return res.redirect("/");
 });
