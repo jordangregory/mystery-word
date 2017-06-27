@@ -22,7 +22,7 @@
 		<input type="text" name="guess" placeholder="Type your guess here!">
 		<input type="submit" value="Good Luck!">
 		<p>Guessed letter: {{#incorrectGuesses}}{{.}}{{/incorrectGuesses}}</p>
-		<p>You have _ guesses left!</p>
+		<p>You have {{guessCount}} guesses left!</p>
 
 	</form>
 </body>
