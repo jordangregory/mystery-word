@@ -1,7 +1,38 @@
 body {
   text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+  width: 100%;
+}
+
+.headerTitle {
+  font-size: 80px;
 }
 
 .randomWord {
   text-align: center;
+}
+
+.guessArea {
+  display: flex;
+  justify-content: space-around;
+}
+
+.guess {
+  padding: 20px;
+  border: 3px solid green;
+  font-size: 50px;
+}
+
+.counter {
+  padding: 20px;
+  border: 3px solid green;
+  font-size: 50px;
+}
+
+.guessInput {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+::-webkit-input-placeholder {
+  color: pink;
 }

@@ -34,6 +34,7 @@ var mySession;
 var userGuesses;
 var guessCount = 8;
 var incorrectGuesses = [];
+var didYouWin = " ";
 var randomWord = words[selectRandomWord(0, words.length)];
 console.log("random word", randomWord);
 var blankSpaces = createBlankSpaces();
@@ -45,18 +46,19 @@ app.get("/", function(req, res) {
     blankSpaces: blankSpaces,
     errorMsg: req.session.errorMsg,
     incorrectGuesses: incorrectGuesses,
-    guessCount: guessCount
+    guessCount: guessCount,
+    winner: didYouWin
   });
 });
 
 app.post("/", function(req, res) {
   userGuesses = req.body.guess;
-  console.log("userGuesses: ", userGuesses);
-  console.log("guesses", req.body.guess);
-
   checkValidityOfUserGuess(req);
   handleUserGuess();
 
+  if (incorrectGuesses == 0) {
+    didYouWin = false;
+  }
   //what happens if you run out of guesses
 
   //what happens if word is solved correctly
@@ -109,6 +111,8 @@ function handleUserGuess() {
     //add guess to incorrect guesses
   }
 }
+
+//get page to reset after word is solved
 
 //Notes
 //get asks for information from the server and passes it to the front-end(for the user)
