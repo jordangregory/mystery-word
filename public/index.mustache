@@ -13,19 +13,22 @@
 
 <body>
 
-	<p>Directions: You'll have 8 guesses to correctly guess the Mystery Word. Input your guess in the box below.</p>
+	<p class="directions">Directions: You'll have 8 guesses to correctly guess the Mystery Word. Input your guess in the box below.</p>
 	<p class="randomWord">
 		{{#blankSpaces}}{{.}}{{/blankSpaces}}</p>
-	<p>{{errorMsg}}</p>
+	<p class="errorMessage">{{errorMsg}}</p>
+
 	<form action="/" method="post" class="guessInput">
-		<input type="text" name="guess" placeholder="Type your guess here!">
+		<input type="text" name="guess" placeholder="Type your guess here!" class="textBox">
 		<input type="submit" value="Good Luck!" class="submitButton">
+
 		<div class="guessArea">
-			<p class="guess">Guessed letter: {{#incorrectGuesses}}{{.}}{{/incorrectGuesses}}</p>
+			<p class="guessedLetters">Guessed letters: {{#incorrectGuesses}}{{.}}{{/incorrectGuesses}}</p>
 			<p class="counter">You have {{guessCount}} left!</p>
 		</div>
 
 	</form>
+
 </body>
 
 </html>
