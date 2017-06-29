@@ -6,30 +6,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="styles.css" for="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 	<title>Mystery Word</title>
 </head>
 <h1 class="headerTitle">Mystery Word</h1>
 
 <body>
 
-	<p class="directions">Directions: You'll have 8 guesses to correctly guess the Mystery Word. Input your guess in the box below.</p>
+	<p class="directions">Directions: <br>
+	You'll have 8 guesses to correctly guess the Mystery Word. <br>
+	Input your guess in the box below.</p>
 	<p class="randomWord">
 		{{#blankSpaces}}{{.}}{{/blankSpaces}}</p>
 	<p class="errorMessage">{{errorMsg}}</p>
-
+{{^winnerMsg}}
 	<form action="/" method="post" class="guessInput">
-		<input type="text" name="guess" placeholder="Type your guess here!" class="textBox">
+		<input type="text" name="guess" placeholder="Type your guess here!" class="textBox" autofocus="autofocus">
 		<input type="submit" value="Good Luck!" class="submitButton">
 
-	<p class="winnerMessage">{{winnerMsg}}</p>
-	
+
+
 		<div class="guessArea">
 			<p class="guessedLetters">Guessed letters: {{#incorrectGuesses}}{{.}}{{/incorrectGuesses}}</p>
-			<p class="counter">You have {{guessCount}} left!</p>
+			<p class="counter">You have {{guessCount}} guesses left!</p>
 		</div>
 	</form>
-
+	{{/winnerMsg}}
+	{{#winnerMsg}}
+	<p class="winnerMessage">{{winnerMsg}}</p>
+	<a class="restart"href="/restart">RESTART GAME?</a>
+	{{/winnerMsg}}
+<script src="main.js"></script>
 </body>
 
 </html>

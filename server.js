@@ -41,6 +41,10 @@ console.log("random word", randomWord);
 var blankSpaces = createBlankSpaces();
 
 //ROUTES
+app.listen(port, function() {});
+console.log("Your port is successfully running on port ", port);
+
+//GET REQUESTS
 app.get("/", function(req, res) {
   if (guessCount == 0) {
     return res.redirect("/youLost");
@@ -61,6 +65,12 @@ app.get("/youLost", function(req, res) {
   res.render("youLost");
 });
 
+app.get("/restart", function(req, res) {
+  gameRestart();
+  res.redirect("/");
+});
+
+//POST REQUESTS
 app.post("/", function(req, res) {
   userGuesses = req.body.guess;
   checkValidityOfUserGuess(req);
@@ -72,15 +82,10 @@ app.post("/", function(req, res) {
   return res.redirect("/");
 });
 
-app.listen(port, function() {});
-console.log("Your port is successfully running on port ", port);
-
+//FUNCTIONS
 function selectRandomWord(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-//Functions
-
 function createBlankSpaces() {
   var x = [];
   for (var i = 0; i < randomWord.length; i++) {
@@ -88,7 +93,6 @@ function createBlankSpaces() {
   }
   return x;
 }
-
 function checkValidityOfUserGuess(request) {
   if (userGuesses.length > 1) {
     request.session.errorMsg = "Please enter ONLY a SINGLE letter";
@@ -101,7 +105,6 @@ function checkValidityOfUserGuess(request) {
     //do something bad becouse this is a number
   }
 }
-
 function handleUserGuess() {
   let isWrong = true;
   for (var i = 0; i < randomWord.length; i++) {
@@ -116,22 +119,20 @@ function handleUserGuess() {
     guessCount--;
   }
   if (randomWord == blankSpaces.join("")) {
-    winnerMsg = "You fuggin' won brah!";
+    winnerMsg = "You won! I bet you could be President!";
   }
 }
-
 function gameRestart(params) {
   mySession;
   userGuesses;
   guessCount = 8;
   incorrectGuesses = [];
   didYouWin = " ";
+  winnerMsg = "";
   randomWord = words[selectRandomWord(0, words.length)];
   console.log("random word", randomWord);
   blankSpaces = createBlankSpaces();
 }
-
-//get page to reset after word is solved
 
 //Notes
 //get asks for information from the server and passes it to the front-end(for the user)

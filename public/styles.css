@@ -1,7 +1,7 @@
 body {
   text-align: center;
-  font-family: 'Gloria Hallelujah', cursive;
   max-width: 100%;
+  font-family: sans-serif;
 }
 
 .headerTitle {
@@ -9,7 +9,6 @@ body {
 }
 
 .directions {
-  color: green;
   font-size: 30px;
 }
 
@@ -18,19 +17,19 @@ body {
   font-size: 30px;
 }
 
-.textBox {
-  height: 150px;
-  width: 150px;
+.winnerMessage {
+  font-size: 50px;
+  color: goldenrod;
 }
 
-.winnerMessage {
-  font-size: 100px;
-  color: goldenrod;
+.restart {
+  text-decoration: none;
+  font-size: 30px;
+  color: red;
 }
 
 .guessArea {
   display: flex;
-  justify-content: space-around;
 }
 
 .guessedLetters {
@@ -44,13 +43,20 @@ body {
 }
 
 .guessInput {
-  font-family: 'Gloria Hallelujah', cursive;
 }
 
 ::-webkit-input-placeholder {
-  color: purple;
 }
 
 .errorMessage {
   color: red;
+}
+
+.loserGIF {
+  height: 100px;
+  width: 100px;
+}
+
+.randomWord {
+  letter-spacing: 10px;
 }
