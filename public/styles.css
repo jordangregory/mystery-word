@@ -1,13 +1,11 @@
 body {
   text-align: center;
   font-family: 'Gloria Hallelujah', cursive;
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
 
 .headerTitle {
   font-size: 80px;
-  color: yellow;
 }
 
 .directions {
@@ -18,12 +16,16 @@ body {
 .randomWord {
   text-align: center;
   font-size: 30px;
-  color: blue;
 }
 
 .textBox {
   height: 150px;
   width: 150px;
+}
+
+.winnerMessage {
+  font-size: 100px;
+  color: goldenrod;
 }
 
 .guessArea {
@@ -33,13 +35,11 @@ body {
 
 .guessedLetters {
   padding: 20px;
-  border: 3px solid green;
   font-size: 50px;
 }
 
 .counter {
   padding: 20px;
-  border: 3px solid green;
   font-size: 50px;
 }
 

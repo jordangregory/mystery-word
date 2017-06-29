@@ -35,20 +35,30 @@ var userGuesses;
 var guessCount = 8;
 var incorrectGuesses = [];
 var didYouWin = " ";
+var winnerMsg = "";
 var randomWord = words[selectRandomWord(0, words.length)];
 console.log("random word", randomWord);
 var blankSpaces = createBlankSpaces();
 
 //ROUTES
 app.get("/", function(req, res) {
+  if (guessCount == 0) {
+    return res.redirect("/youLost");
+  }
   mySession = req.session;
   res.render("index", {
     blankSpaces: blankSpaces,
     errorMsg: req.session.errorMsg,
     incorrectGuesses: incorrectGuesses,
     guessCount: guessCount,
-    winner: didYouWin
+    winner: didYouWin,
+    winnerMsg: winnerMsg
   });
+});
+
+app.get("/youLost", function(req, res) {
+  gameRestart();
+  res.render("youLost");
 });
 
 app.post("/", function(req, res) {
@@ -59,10 +69,6 @@ app.post("/", function(req, res) {
   if (incorrectGuesses == 0) {
     didYouWin = false;
   }
-  //what happens if you run out of guesses
-
-  //what happens if word is solved correctly
-
   return res.redirect("/");
 });
 
@@ -78,7 +84,7 @@ function selectRandomWord(min, max) {
 function createBlankSpaces() {
   var x = [];
   for (var i = 0; i < randomWord.length; i++) {
-    x.push("_ ");
+    x.push("_");
   }
   return x;
 }
@@ -108,8 +114,21 @@ function handleUserGuess() {
   if (isWrong) {
     incorrectGuesses.push(userGuesses + " ");
     guessCount--;
-    //add guess to incorrect guesses
   }
+  if (randomWord == blankSpaces.join("")) {
+    winnerMsg = "You fuggin' won brah!";
+  }
+}
+
+function gameRestart(params) {
+  mySession;
+  userGuesses;
+  guessCount = 8;
+  incorrectGuesses = [];
+  didYouWin = " ";
+  randomWord = words[selectRandomWord(0, words.length)];
+  console.log("random word", randomWord);
+  blankSpaces = createBlankSpaces();
 }
 
 //get page to reset after word is solved
