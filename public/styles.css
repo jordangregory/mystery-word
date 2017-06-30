@@ -1,7 +1,13 @@
 body {
   text-align: center;
+  max-height: 100%;
   max-width: 100%;
-  font-family: sans-serif;
+  font-family: 'Press Start 2P', cursive;
+  background: url(http://cdn2us.denofgeek.com/sites/denofgeekus/files/2017/06/atari2600a.jpg);
+  background-size: 1574px 1000px;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #dcb882;
 }
 
 .headerTitle {
@@ -9,7 +15,7 @@ body {
 }
 
 .directions {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .randomWord {
@@ -41,11 +47,12 @@ body {
   padding: 20px;
   font-size: 50px;
 }
-
-.guessInput {
+.textBox {
+  width: 230px;
 }
 
 ::-webkit-input-placeholder {
+  font-family: 'Press Start 2P', cursive;
 }
 
 .errorMessage {
@@ -53,10 +60,15 @@ body {
 }
 
 .loserGIF {
-  height: 100px;
-  width: 100px;
+  height: 300px;
+  width: 500px;
+  border-radius: 50%;
 }
 
 .randomWord {
   letter-spacing: 10px;
+}
+
+.incorrectGuesses {
+  font-size: 30px;
 }
