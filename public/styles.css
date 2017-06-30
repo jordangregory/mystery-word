@@ -49,6 +49,16 @@ body {
 }
 .textBox {
   width: 230px;
+  height: 40px;
+}
+
+.submitButton {
+  color: goldenrod;
+  background: #e03623;
+  border: 1px solid #e03623;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
 }
 
 ::-webkit-input-placeholder {
@@ -59,16 +69,27 @@ body {
   color: red;
 }
 
-.loserGIF {
-  height: 300px;
-  width: 500px;
-  border-radius: 50%;
-}
-
 .randomWord {
   letter-spacing: 10px;
 }
 
 .incorrectGuesses {
   font-size: 30px;
+}
+
+/*youLost*/
+
+.loserGIF {
+  height: 300px;
+  width: 500px;
+  border-radius: 50%;
+  margin-bottom: 50px;
+}
+
+.loserContainer {
+  margin-top: 50px;
+}
+
+.tryNotToLose {
+  margin-top: 50px;
 }
